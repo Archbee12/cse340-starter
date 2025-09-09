@@ -1,6 +1,164 @@
+
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background-color: rgb(34, 29, 29);
+  --accent: rgb(255, 255, 255);
+  --accent2: rgb(0, 200, 255);
+  --border: rgb(32, 128, 155);
+  --transparency: rgba(255, 255, 255, 0.434);
+}
+
+#wrapper {
+  background-color: var(--accent);
+  max-width: 1600px;
+  margin: auto;
+  border: 4px solid var(--accent2);
+  border-radius: 10px;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1.5rem;
+
+  a {
+    text-decoration: none;
+    color: var(--background-color);
+    font-size: 1.2rem;
+  }
+
+  .siteName a {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-around;
+  padding: 1.2rem;
+  background-color: var(--background-color);
+  color: var(--accent);
+
+  li {
+    list-style: none;
+    font-size: 1.2rem;
+  }
+}
+
+h1 {
+  margin: 2rem 1rem;
+}
+
+.hero {
+  display: grid;
+  position: relative;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  .hero-desc {
+    background-color: var(--transparency);
+    align-self: start;
+    position: absolute;
+    bottom: 7rem;
+    padding: 1rem;
+    margin: 1rem;
+    display: block;
+
+    h2, p {
+      color: var(--accent2);
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+
+    img {
+      width: 140px;
+      margin-top: 2rem;
+    }
+  }
+}
+
+section {
+  margin: 2rem 1rem;
+  
+  h2 {
+    font-size: 2rem;
+    margin: 2rem auto;
+  }
+
+  .reviews {
+
+    ul {
+      margin-left: 1rem;
+    }
+
+    ul li {
+      line-height: 200%;
+      font-size: 1.5rem;
+      margin: 10px;
+    }
+  }
+
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem auto;
+
+    figure {
+      text-align: center;
+      padding: 10px;
+      background-color: var(--accent2);
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+
+    figcaption {
+      color: blue;
+      text-decoration: underline;
+      margin-top: 10px;
+      font-size: 1.5rem;
+      background-color: transparent;
+    }
+  }
+}
+
+@media (min-width: 840px) {
+  body {
+    background-image: url("../images/site/small_check.jpg");  
+  }
+
+  section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    .grid {
+      grid-area: 1/1;
+    }
+  }
+
+  
 }
