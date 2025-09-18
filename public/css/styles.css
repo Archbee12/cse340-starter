@@ -1,5 +1,3 @@
-
-
 /******* Change Box Model ***************/
 *,
 *:before,
@@ -30,17 +28,18 @@ header {
   flex-direction: row;
   justify-content: space-between;
   margin: 1.5rem;
+}
 
-  a {
-    text-decoration: none;
-    color: var(--background-color);
-    font-size: 1.2rem;
-  }
+header a {
+  text-decoration: none;
+  font-size: 1.2rem;nav ul li a {
+  color: var(--accent);
+}
+}
 
-  .siteName a {
-    font-size: 2rem;
-    font-weight: 700;
-  }
+header .siteName a {
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 nav ul {
@@ -51,11 +50,21 @@ nav ul {
   padding: 1.2rem;
   background-color: var(--background-color);
   color: var(--accent);
+}
 
-  li {
-    list-style: none;
-    font-size: 1.2rem;
-  }
+nav ul li {
+  list-style: none;
+  font-size: 1.2rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+nav ul li a:hover {
+  color: var(--background-color);
+  background-color: var(--accent);
 }
 
 h1 {
@@ -65,84 +74,120 @@ h1 {
 .hero {
   display: grid;
   position: relative;
+}
 
-  img {
-    width: 100%;
-    display: block;
-  }
+.hero img {
+  width: 100%;
+  display: block;
+}
 
-  .hero-desc {
-    background-color: var(--transparency);
-    align-self: start;
-    position: absolute;
-    bottom: 7rem;
-    padding: 1rem;
-    margin: 1rem;
-    display: block;
+.hero .hero-desc {
+  background-color: var(--transparency);
+  align-self: start;
+  position: absolute;
+  bottom: 7rem;
+  padding: 1rem;
+  margin: 1rem;
+  display: block;
+}
 
-    h2, p {
-      color: var(--accent2);
-      margin: 0;
-    }
+.hero .hero-desc h2,
+.hero .hero-desc p {
+  color: var(--accent2);
+  margin: 0;
+}
 
-    p {
-      font-size: 1.5rem;
-    }
+.hero .hero-desc p {
+  font-size: 1.5rem;
+}
 
-    img {
-      width: 140px;
-      margin-top: 2rem;
-    }
-  }
+.hero .hero-desc img {
+  width: 140px;
+  margin-top: 2rem;
 }
 
 section {
   margin: 2rem 1rem;
-  
-  h2 {
-    font-size: 2rem;
-    margin: 2rem auto;
-  }
+}
 
-  .reviews {
+section h2 {
+  font-size: 2rem;
+  margin: 2rem auto;
+}
 
-    ul {
-      margin-left: 1rem;
-    }
+section .reviews ul {
+  margin-left: 1rem;
+}
 
-    ul li {
-      line-height: 200%;
-      font-size: 1.5rem;
-      margin: 10px;
-    }
-  }
+section .reviews ul li {
+  line-height: 200%;
+  font-size: 1.5rem;
+  margin: 10px;
+}
 
-  .img-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin: 2rem auto;
+section .img-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem auto;
+}
 
-    figure {
-      text-align: center;
-      padding: 10px;
-      background-color: var(--accent2);
-    }
+section .img-grid figure {
+  text-align: center;
+  padding: 10px;
+  background-color: var(--accent2);
+}
 
-    img {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-    }
+section .img-grid img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
 
-    figcaption {
-      color: blue;
-      text-decoration: underline;
-      margin-top: 10px;
-      font-size: 1.5rem;
-      background-color: transparent;
-    }
-  }
+section .img-grid figcaption {
+  color: blue;
+  text-decoration: underline;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  background-color: transparent;
+}
+
+#inv-display {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  list-style: none;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+#inv-display li {
+  border: 2px solid var(--border);
+  border-radius: 8px;  text-align: center;
+  background: var(--accent);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#inv-display li img {
+  width: 100%;
+  height: auto;
+  /* max-width: 300px; */
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+#inv-display .namePrice {
+  padding: 1rem;
+}
+
+#inv-display .namePrice h2 {
+  padding: 1rem;
+}
+
+#inv-display span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--background-color);
 }
 
 @media (min-width: 840px) {
@@ -154,11 +199,22 @@ section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-
-    .grid {
-      grid-area: 1/1;
-    }
   }
 
-  
+  section .grid {
+    grid-area: 1/1;
+  }
+
+  #inv-display {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem;
+  }
+
+  #inv-display li img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+  }
 }
