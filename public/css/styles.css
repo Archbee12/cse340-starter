@@ -60,11 +60,12 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: var(--accent);
+  cursor: pointer;
 }
 
 nav ul li a:hover {
   color: var(--background-color);
-  background-color: var(--accent);
+  background-color: var(--aaccent);
 }
 
 h1 {
