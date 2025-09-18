@@ -191,6 +191,16 @@ section .img-grid figcaption {
   color: var(--background-color);
 }
 
+/* Error message */
+.error-heading {
+  padding-top: 2rem;
+}
+.error-heading, .error-message {
+  text-align: center;
+  /* padding: 2rem; */
+  margin-bottom: 1rem;
+}
+
 @media (min-width: 840px) {
   body {
     background-image: url("../images/site/small_check.jpg");  
@@ -214,7 +224,7 @@ section .img-grid figcaption {
   #inv-display li img {
     width: 100%;
     height: auto;
-    max-width: 300px;
+    /* max-width: 300px; */
     object-fit: contain;
     margin-bottom: 1rem;
   }
