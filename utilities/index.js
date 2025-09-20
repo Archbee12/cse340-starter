@@ -25,9 +25,9 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
-/* **************************************
+/* ************************************
 * Build the classification view HTML
-* ************************************ */
+* ********************************** */
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
@@ -57,5 +57,40 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+/* ************************************
+* Build the classification view HTML
+* ********************************** */
+Util.buildVehicleDetail = async function(vehicle) {
+  const color = vehicle.inv_color ? vehicle.inv_color.toLowerCase() : "black";
+
+  let detail = `
+    <section id="inv-detail">
+      <p class="vehicle-name">${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model} </p>
+      <div class="vehicle-inv">
+        <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
+        <div class="info">
+          <h2>${vehicle.inv_make} ${vehicle.inv_model} details</h2>
+          <h3>Price: $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</h3>
+          <p class="year"><strong>Year:</strong> ${vehicle.inv_year}</p>
+          <p class="mileage"><strong>Mileage:</strong> ${new Intl.NumberFormat('en-US').format(vehicle.inv_miles)} miles</p>
+          <p class="color">
+            <strong>Color:</strong> 
+            <span class="col" style="background-color:${color}"> ${vehicle.inv_color}</span>
+          </p>
+          <p class="desc"><strong>Description:</strong> ${vehicle.inv_description}</p>
+        </div>
+      </div>
+    </section>
+  `
+  return detail
+}
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 module.exports = Util

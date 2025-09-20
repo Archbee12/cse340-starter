@@ -17,7 +17,7 @@
 
 #wrapper {
   background-color: var(--accent);
-  max-width: 1600px;
+  max-width: 1200px;
   margin: auto;
   border: 4px solid var(--accent2);
   border-radius: 10px;
@@ -201,18 +201,68 @@ section .img-grid figcaption {
   margin-bottom: 1rem;
 }
 
+/* Vehicle Detail Page */
+#inv-detail div {
+  display: grid;
+  grid-template-areas: 
+  "image"
+  "info";
+  gap: 1rem;
+  /* max-width: 600px; */
+}
+
+/* #inv-detail {
+  display: block;
+  max-width: 600px;
+} */
+
+.vehicle-name {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 1.5rem auto;
+}
+
+#inv-detail div img {
+  grid-area: image;
+  width: 100%;
+  border-radius: 8px;
+}
+
+#inv-detail div .info {
+  grid-area: info;
+  margin: 0;
+}
+
+#inv-detail div h2 {
+  margin: 0;
+}
+
+#inv-detail div h3 {
+  color: green;
+  font-weight: 600;
+}
+
+#inv-detail div .mileage {
+  color: yellow;
+}
+
+.col {
+  padding: .75rem;
+  margin: .5rem;
+}
+
 @media (min-width: 840px) {
   body {
     background-image: url("../images/site/small_check.jpg");  
   }
 
-  section {
+  .upgrades {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
-  section .grid {
+  .upgrades .grid {
     grid-area: 1/1;
   }
 
@@ -227,5 +277,20 @@ section .img-grid figcaption {
     /* max-width: 300px; */
     object-fit: contain;
     margin-bottom: 1rem;
+  }
+
+  /* vehicle detail styling */
+  /* #inv_detail {
+    grid-template-columns: 1fr auto;
+  } */
+  #inv-detail .vehicle-inv {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "image info";
+  }
+
+  #inv-detail div img {
+    width: 500px;
+    object-fit: cover;
   }
 }
