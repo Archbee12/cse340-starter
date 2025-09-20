@@ -32,10 +32,10 @@ header {
 
 header a {
   text-decoration: none;
-  font-size: 1.2rem;nav ul li a {
+  font-size: 1.2rem;
   color: var(--accent);
 }
-}
+
 
 header .siteName a {
   font-size: 2rem;
@@ -243,12 +243,13 @@ section .img-grid figcaption {
 }
 
 #inv-detail div .mileage {
-  color: orange;
+  color: red;
+  font-size: 1rem;
 }
 
-.col {
-  padding: .75rem;
-  margin: .5rem;
+#inv-detail div .desc {
+  font-size: 1rem;
+  line-height: 25px;
 }
 
 @media (min-width: 840px) {
@@ -267,8 +268,10 @@ section .img-grid figcaption {
   }
 
   #inv-display {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 1rem;
+    justify-content: center;
+    margin: 0 auto;
   }
 
   #inv-display li img {
