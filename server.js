@@ -1,5 +1,3 @@
-
-const utilities = require("./utilities/");
 /* ******************************************
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
@@ -13,9 +11,35 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-const inventoryRoute = require("./routes/inventoryRoute");
+const inventoryRoute = require("./routes/inventoryRoute")
 const errorRoute = require("./routes/errorRoute");
+const utilities = require("./utilities/")
+const accountRoute = require("./routes/accountRoute")
 
+// Require sesion and access to database connections
+const session = require("express-session")
+const pool = require('./database/')
+
+/* ***********************
+ * Middleware
+ * **********************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Message Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 /* ***********************
  * View Engine and Templates
@@ -28,6 +52,9 @@ app.set("layout", "./layouts/layout")
 app.get("/", utilities.handleErrors(baseController.buildHome)) /* {
   res.render("index", {title: "Home"})
 }) */
+// Account Route
+app.use("/account", accountRoute)
+// Inventory Route
 app.use("/inv", inventoryRoute)
 
 /* ***********************

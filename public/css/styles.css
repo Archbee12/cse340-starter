@@ -252,6 +252,52 @@ section .img-grid figcaption {
   line-height: 25px;
 }
 
+/* Login Page Styling */
+.login-form {
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.login-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form button {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1rem;
+  width: 100%;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #005fa3;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+
 @media (min-width: 840px) {
   body {
     background-image: url("../images/site/small_check.jpg");  
@@ -297,3 +343,4 @@ section .img-grid figcaption {
     object-fit: cover;
   }
 }
+ 
