@@ -191,6 +191,13 @@ section .img-grid figcaption {
   color: var(--background-color);
 }
 
+/* Messages */
+#messages { 
+  list-style: none; 
+  padding: 1rem; 
+  color: green;
+}
+
 /* Error message */
 .error-heading {
   padding-top: 2rem;
@@ -253,7 +260,7 @@ section .img-grid figcaption {
 }
 
 /* Login Page Styling */
-.login-form {
+form {
   max-width: 400px;
   margin: 1rem auto;
   padding: 1.5rem;
@@ -262,21 +269,24 @@ section .img-grid figcaption {
   background: #fafafa;
 }
 
-.login-form label {
+form label {
   display: block;
   margin-top: 1rem;
   font-weight: bold;
 }
 
-.login-form input {
+form input, 
+textarea, 
+select {
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.3rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  border-left-color: black;
 }
 
-.login-form button {
+form button {
   margin-top: 1.5rem;
   padding: 0.7rem 1rem;
   width: 100%;
@@ -288,7 +298,7 @@ section .img-grid figcaption {
   cursor: pointer;
 }
 
-.login-form button:hover {
+form button:hover {
   background-color: #005fa3;
 }
 
@@ -297,6 +307,63 @@ section .img-grid figcaption {
   margin-top: 1rem;
 }
 
+/* Additional form styling for invalid and valid input */
+input:required:invalid {
+  border-left-color: #d70000;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #0077cc;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,119,204,0.3);
+  border-left-color: black; 
+  outline: none;
+}
+
+form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input:required:valid {
+  border-left-color: green;
+  background-color: rgb(132, 173, 132);
+}
+
+#account_password:invalid {
+  border-color: #e63946;
+  background-color: #fff5f5; 
+} 
+/* 
+#account_password:valid {
+  border-left-color: green;
+  background-color: #e6fff3; 
+} */
+
+/* Password requirement sytling */
+.requirements {
+  margin: 1.5rem 0 1rem 0;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 0.9rem;
+  font-style: italic;
+  list-style: circle;
+  color: #333;
+  border-radius: 6px;
+}
+
+/* Management Styling */
+.management-links {
+  padding: 1rem;
+}
+
+.management-links ul li {
+  list-style: none;
+  line-height: 30px;
+}
 
 @media (min-width: 840px) {
   body {
