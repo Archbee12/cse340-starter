@@ -46,7 +46,8 @@ invValidate.inventoryRules = () => {
  * Check data and return errors on vehicle inventory
  ************************* */
 invValidate.checkInventoryData = async (req, res, next) => {
-  const errors = validationResult(req)
+  let errors = []
+  errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     let classificationList = await utilities.buildClassificationList(req.body.classification_id)

@@ -11,7 +11,6 @@ validate.classificationRules = () => {
       // .trim()
       .escape()
       .notEmpty()
-      .withMessage("Please provide a classification name.")
       .isAlpha()
       .withMessage("Classification must contain only letters (no spaces, numbers, or special characters).")
       .custom(async (classification_name) => {
@@ -26,9 +25,8 @@ validate.classificationRules = () => {
 /* Middleware to check validation results */
 validate.checkClassificationData = async (req, res, next) => {
   const { classification_name } = req.body
-
-  const errors = validationResult(req)
-  
+  let errors = []
+  errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     res.status(400).render("inventory/add-classification", {

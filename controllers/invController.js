@@ -70,7 +70,7 @@ invCont.buildManagement = async function (req, res, next) {
     title: "Add Classification",
     nav,
     // message: null,
-    errors,
+    errors: null,
   })
  }
 
@@ -92,7 +92,7 @@ invCont.addClassification = async function (req, res) {
     res.status(501).render("inventory/add-classification", {
       title: "Add Classification",
       nav,
-      errors,
+      errors: null,
     })
   }
 }
@@ -107,7 +107,7 @@ invCont.buildAddInventory = async function (req, res, next) {
     title: "Add Inventory",
     nav,
     classificationList,
-    errors,
+    errors: null
   })
 }
 
