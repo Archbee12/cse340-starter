@@ -16,6 +16,7 @@ const errorRoute = require("./routes/errorRoute");
 const utilities = require("./utilities/")
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 // Require sesion and access to database connections
 const session = require("express-session")
@@ -45,7 +46,10 @@ app.use(function(req, res, next){
 // BodyParser Usage
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true})) // for parsing application/x-www-form-urlencoded
-
+// Unit 5, Login Activity with cookie
+app.use(cookieParser())
+// Login Process activity
+app.use(utilities.checkJWTToken)
 /* ***********************
  * View Engine and Templates
  *************************/

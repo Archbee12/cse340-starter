@@ -6,12 +6,18 @@ const utilities = require("../utilities/")
 const regValidate = require("../utilities/account-validation")
 const loginValidate = require("../utilities/account-validation")
 
+
 // Build my Account Login View 
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
 // Register View
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
+// Management View
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
+/* ************************
+*  Process Login
+*  Stickiness activity*/
 // Posting the register request
 router.post(
   '/register', 
@@ -24,7 +30,7 @@ router.post(
   "/login",
   loginValidate.loginRules(),
   loginValidate.checkLoginData,
-  utilities.handleErrors(accountController.loginAccount)
+  utilities.handleErrors(accountController.accountLogin)
 )
 
 module.exports = router

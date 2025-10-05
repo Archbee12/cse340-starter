@@ -12,10 +12,10 @@
 
 <form action="/account/login" method="post" class="login-form" id="loginForm">
   <label for="account_email">Email:</label>
-  <input type="email" id="accountEmail" name="account" required value ="<%= locals.account_email %>" placeholer="Enter your email" />
+  <input type="email" id="accountEmail" name="account_email" required value ="<%= locals.account_email %>" placeholder="Enter your email" />
 
   <label for="account_password">Password: 
-    <input type="password" id="account_password" name="account_password" required placeholder="Enter your password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"/>
+    <input type="password" id="accountPassword" name="account_password" required placeholder="Enter your password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"/>
   </label>
 
   <!-- Password requirements info -->

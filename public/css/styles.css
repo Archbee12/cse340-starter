@@ -355,15 +355,118 @@ input:required:valid {
   border-radius: 6px;
 }
 
-/* Management Styling */
-.management-links {
+/* Inventory Management Styling */
+.management {
   padding: 1rem;
 }
 
-.management-links ul li {
+.management.links ul li {
   list-style: none;
   line-height: 30px;
 }
+
+.management h2 {
+  margin: 1rem auto;
+}
+
+/* Select button styling */
+#classificationList {
+  width: 250px;
+  padding: 10px;
+  margin: .25rem 1rem;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover / focus effect */
+#classificationList:hover,
+#classificationList:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 6px rgba(46, 125, 50, 0.6);
+}
+
+/* Style the dropdown options */
+#classificationList option {
+  padding: 10px;
+  font-size: 15px;
+}
+
+/* Inventory Management table styling */
+.table {
+  margin: 1rem;
+}
+
+#inventoryDisplay {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#inventoryDisplay thead {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Striped rows */
+#inventoryDisplay tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+#inventoryDisplay tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Links styling */
+#inventoryDisplay a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  padding: 15px 10px;       /* spacing */
+  margin-top: 40px;         /* push footer down */
+}
+
+footer a {
+  color: #7b97e0;           /* green accent */
+  text-decoration: none;
+  margin-left: 10px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #275bdf;           /* lighter green on hover */
+  text-decoration: underline;
+}
+
 
 @media (min-width: 840px) {
   body {

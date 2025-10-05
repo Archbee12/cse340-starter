@@ -64,12 +64,6 @@ validate.loginRules = () => {
       .isEmail()
       .normalizeEmail()
       .withMessage("A valid email is requierd.")
-      .custom(async (account_email) => {
-        const emailExists = await accountModel.checkExistingEmail(account_email)
-        if (emailExists) {
-          throw new Error("This email already exist. Please log in or use a different email")
-        }
-      }),
   ]
 }
 
