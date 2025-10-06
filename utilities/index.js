@@ -1,4 +1,3 @@
-const invModel = require("../models/inventory-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -7,6 +6,7 @@ require("dotenv").config()
   * Constructs the nav HTML unordered list
   **************************** */
 Util.getNav = async function (req, res, next) {
+  const invModel = require("../models/inventory-model")
   let data = await invModel.getClassifications()
   console.log(data)
   let list = "<ul>"
@@ -92,6 +92,7 @@ Util.buildVehicleDetail = async function(vehicle) {
 * Build the classification <select> element
 * ********************************** */
 Util.buildClassificationList = async function(selectedId = null) {
+  const invModel = require("../models/inventory-model")
   let data = await invModel.getClassifications()
   let classificationList = '<select name="classification_id" id="classificationList" required>'
   classificationList += "<option value=''>Choose a Classification</option>"

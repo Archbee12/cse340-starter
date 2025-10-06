@@ -190,33 +190,8 @@ invCont.updateInventory = async function (req, res) {
 
   let nav = await utilities.getNav()
 
-  const updateResult = await invModel.UpdateInventory({
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id
-  })
-
-  if (updateResult) {
-    const itemName = updateResult.inv_make + " " + updateResult.inv_model
-    req.flash("notice", `The ${itemName} was successfully updated`)
-    res.redirect("/inv")
-  } else {
-    const classificationList = await utilities.buildClassificationList(classification_id)
-    const itemName = `${inv_make} ${inv_model}`
-    req.flash("notice", "Sorry, the insert failed.")
-    res.status(501).render("inventory/update-inventory", {
-      title: "Edit " + itemName,
-      nav,
-      classificationList: classificationList,
-      errors: null,
+  try {
+    const updateResult = await invModel.updateInventory(
       inv_id,
       inv_make,
       inv_model,
@@ -228,7 +203,37 @@ invCont.updateInventory = async function (req, res) {
       inv_miles,
       inv_color,
       classification_id
-    })
+    )
+  
+    if (updateResult) {
+      const itemName = updateResult.inv_make + " " + updateResult.inv_model
+      req.flash("notice", `The ${itemName} was successfully updated`)
+      res.redirect("/inv")
+    } else {
+      const classificationList = await utilities.buildClassificationList(classification_id)
+      const itemName = `${inv_make} ${inv_model}`
+      req.flash("notice", "Sorry, the insert failed.")
+      res.status(501).render("inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        classificationList: classificationList,
+        errors: null,
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+      })
+    }
+  } catch (error) {
+    console.error("updateInventory error:", error)
+    next(error)
   }
 }
 
@@ -248,14 +253,15 @@ invCont.getInventoryJSON = async (req, res, next) => {
 /* *****************************
  * Build the update inventory
  * **************************** */
-invCont.updateInventoryView = async function (req, res, next) {
+invCont.buildUpdateInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)
   let nav = await utilities.getNav()
   const itemData = await invModel.getInventoryById(inv_id)
+  console.log('itemData:', itemData)
   let classificationList = await utilities.buildClassificationList(itemData.classification_id)
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
-  res.render("./inventory/update-inventory", {
-    title: "Edit" + itemName,
+  res.render("./inventory/edit-inventory", {
+    title: "Edit " + itemName,
     nav,
     classificationList: classificationList,
     errors: null,

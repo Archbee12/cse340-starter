@@ -3,8 +3,8 @@ const express = require("express")
 const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities/")
-classValidate = require("../utilities/classification-validation")
-invValidate = require("../utilities/inventory-validation")
+const classValidate = require("../utilities/classification-validation")
+const invValidate = require("../utilities/inventory-validation")
 
 //Router to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
@@ -39,5 +39,21 @@ router.post("/add-inventory",
   utilities.handleErrors(invController.addInventory)
 )
 
+// Get the inventory list by classification
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Load update form
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.buildUpdateInventoryView)  // make sure it’s updateInventoryView, not buildupdateInventory
+)
+
+// Handle update form POST
+router.post(
+  "/update-inventory",
+  invValidate.inventoryRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+)
 
 module.exports = router;
