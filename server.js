@@ -50,6 +50,15 @@ app.use(bodyParser.urlencoded({ extended: true})) // for parsing application/x-w
 app.use(cookieParser())
 // Login Process activity
 app.use(utilities.checkJWTToken)
+
+// Make sessions available to all views
+// Make session data available to all views
+app.use((req, res, next) => {
+  res.locals.loggedIn = req.session.loggedIn
+  res.locals.accountData = req.session.accountData
+  next()
+})
+
 /* ***********************
  * View Engine and Templates
  *************************/

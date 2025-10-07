@@ -46,8 +46,12 @@
     <p> • Name must be alphabetic characters only</p>
   </div>
 
-  <button type="submit">Update Vehicle</button>
+  <button type="submit" disabled>Update Vehicle</button>
 
   <input type="hidden" name="inv_id" 
   <% if (locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %> >
 </form>
+
+
+
+<script src="../../js/inv-update.js"></script>

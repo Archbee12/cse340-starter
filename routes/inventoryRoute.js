@@ -48,12 +48,20 @@ router.get(
   utilities.handleErrors(invController.buildUpdateInventoryView)  // make sure it’s updateInventoryView, not buildupdateInventory
 )
 
+router.get(
+  "/delete/:inv_id", utilities.handleErrors(invController.buildDeleteView)
+)
+
 // Handle update form POST
 router.post(
   "/update-inventory",
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
+)
+
+router.post(
+  "/delete-inventory", utilities.handleErrors(invController.deleteInventory)
 )
 
 module.exports = router;

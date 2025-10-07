@@ -279,4 +279,56 @@ invCont.buildUpdateInventoryView = async function (req, res, next) {
   })
 }
 
+/* *****************************
+ * Build Delete Confirmation View
+ * **************************** */
+invCont.buildDeleteView = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id) // Get the item ID from the URL
+    let nav = await utilities.getNav()
+
+    // Fetch the vehicle data from the database
+    const itemData = await invModel.getInventoryById(inv_id)
+
+    // Build vehicle name for title
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+
+    // Render the delete-confirm view
+    res.render("./inventory/delete-confirm", {
+      title: "Delete " + itemName,
+      nav,
+      errors: null,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_price: itemData.inv_price
+    })
+  } catch (error) {
+    console.error("buildDeleteView error:", error)
+    next(error)
+  }
+}
+
+/* *****************************
+ * Delete Inventory Item
+ * **************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.body.inv_id)
+    const deleteResult = await invModel.deleteInventoryItem(inv_id)
+
+    if (deleteResult) {
+      req.flash("notice", "The inventory item was successfully deleted.")
+      res.redirect("/inv/")
+    } else {
+      req.flash("notice", "Sorry, the delete failed.")
+      res.redirect(`/inv/delete-inventory/${inv_id}`)
+    }
+  } catch (error) {
+    console.error("deleteInventory error:", error)
+    next(error)
+  }
+}
+
 module.exports = invCont
