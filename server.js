@@ -52,10 +52,9 @@ app.use(cookieParser())
 app.use(utilities.checkJWTToken)
 
 // Make sessions available to all views
-// Make session data available to all views
 app.use((req, res, next) => {
-  res.locals.loggedIn = req.session.loggedIn
-  res.locals.accountData = req.session.accountData
+  res.locals.loggedin = req.session.loggedin
+  res.locals.accountData = req.session.accountData 
   next()
 })
 

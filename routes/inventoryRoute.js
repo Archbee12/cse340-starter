@@ -13,15 +13,22 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildDetail));
 
 // Router to build the management inventory
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get(
+  "/", 
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin,
+  utilities.handleErrors(invController.buildManagement));
 
 // Add classification form
-router.get("/add-classification",
+router.get("/add-classification", utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddClassification)
 )
 
 // Process Add Classification
 router.post("/add-classification",
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin,
   classValidate.classificationRules(),
   classValidate.checkClassificationData,
   utilities.handleErrors(invController.addClassification)
@@ -29,11 +36,15 @@ router.post("/add-classification",
 
 // Add inventory form
 router.get("/add-inventory",
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddInventory)
 )
 
 // Process inventory form
 router.post("/add-inventory",
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin,
   invValidate.inventoryRules(),
   invValidate.checkInventoryData,
   utilities.handleErrors(invController.addInventory)
@@ -45,23 +56,32 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // Load update form
 router.get(
   "/edit/:inv_id",
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildUpdateInventoryView)  // make sure it’s updateInventoryView, not buildupdateInventory
 )
 
+// Load delete form
 router.get(
-  "/delete/:inv_id", utilities.handleErrors(invController.buildDeleteView)
+  "/delete/:inv_id", 
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin, utilities.handleErrors(invController.buildDeleteView)
 )
 
 // Handle update form POST
 router.post(
   "/update-inventory",
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin,
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
 )
 
 router.post(
-  "/delete-inventory", utilities.handleErrors(invController.deleteInventory)
+  "/delete-inventory",
+  utilities.checkJWTToken,
+  utilities.checkEmployeeOrAdmin, utilities.handleErrors(invController.deleteInventory)
 )
 
 module.exports = router;

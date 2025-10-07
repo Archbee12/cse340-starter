@@ -10,4 +10,28 @@
   </ul>
 <% } %>
 
-<p>You're logged in.</p>
+<!-- accountData was passed in from controller; also available as res.locals.accountData -->
+<%
+const acct = accountData || {}
+const firstName = acct.account_firstname || "Customer"
+const acctType = acct.account_type || "Client"
+const acctId = acct.account_id || ""
+%>
+
+<div class="management">
+  <h2>Welcome <%= firstName %></h2>
+
+  <!-- Update account link: visible to everyone and placed above inventory management section -->
+  <p>
+    <a href="/account/update/<%= acctId %>" title="Update your account information">Update account information</a>
+  </p>
+</div>
+
+<div class="management">
+  <% if (acctType === "Employee" || acctType === "Admin") { %>
+    <h2>Inventory Management</h2>
+    <p>
+      <a href="/inv/" title="Go to Inventory Management (employees/admins only)">Manage Inventory</a>
+    </p>
+  <% } %>
+</div>

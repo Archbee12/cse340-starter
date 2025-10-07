@@ -33,4 +33,27 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 )
 
+// Account Update View
+router.get(
+  "/update/:account_id",
+  utilities.checkJWTToken,
+  utilities.handleErrors(accountController.buildAccountUpdate)
+)
+
+// Posting the update view
+router.post(
+  "/update",
+  utilities.checkLogin,
+  accountController.updateAccountInfo
+)
+
+// Update password route
+router.post(
+  "/update-password",
+  utilities.handleErrors(accountController.updatePassword)
+)
+
+// Logout route
+router.get("/logout", utilities.handleErrors(accountController.logoutAccount));
+
 module.exports = router

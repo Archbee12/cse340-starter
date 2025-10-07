@@ -129,8 +129,12 @@ Util.checkJWTToken = (req, res, next) => {
           res.clearCookie("jwt")
           return res.redirect("/account/login")
         }
+        // ✅ Restore user session
+        req.session.loggedin = true
+        req.session.accountData = accountData
+
         res.locals.accountData = accountData
-        res.locals.loggedin = 1
+        res.locals.loggedin = true
         next()
       }
     )
@@ -150,5 +154,21 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+/* **************************
+ *  Authorization Middleware
+ *  Only allow Employee or Admin users
+ * **************************** */
+Util.checkEmployeeOrAdmin = (req, res, next) => {
+  if (res.locals.accountData && res.locals.accountData.account_type) {
+    const type = res.locals.accountData.account_type
+    if (type === "Employee" || type === "Admin") {
+      return next() // Authorized
+    }
+  }
+
+  req.flash("notice", "You must be logged in as an Employee or Admin to access this area.")
+  return res.status(403).redirect("/account/login")
+}
 
 module.exports = Util

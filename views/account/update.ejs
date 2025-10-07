@@ -1,0 +1,54 @@
+<h1><%= title %></h1>
+
+<!-- Display any messages or validation errors -->
+<% if (errors && errors.length > 0) { %>
+<ul>
+  <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<!-- Account Update Form -->
+<section>
+  <!-- <h2>Account Update</h2> -->
+  <form action="/account/update" method="post">
+    <label for="account_firstname">First Name</label>
+    <input type="text" id="account_firstname" name="account_firstname" required value="<%= accountData.account_firstname %>">
+
+    <label for="account_lastname">Last Name</label>
+    <input type="text" id="account_lastname" name="account_lastname" required value="<%= accountData.account_lastname %>">
+
+    <label for="account_email">Email</label>
+    <input type="email" id="account_email" name="account_email" required value="<%= accountData.account_email %>">
+
+    <!-- Hidden field for account_id -->
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+    <button type="submit">Update Account</button>
+  </form>
+</section>
+
+<!-- Password Change Form -->
+<section>
+  <h2>Change Password</h2>
+  <p>Enter a new password below to change your current one. Passwords must be at least 12 characters and include at least one number, one uppercase letter, and one special character.</p>
+
+  <form action="/account/update-password" method="post" class="account-form">
+    <label for="account_password">New Password:</label>
+    <input type="password" id="account_password" name="account_password" required
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+      title="Password must be at least 12 characters long and include a number, an uppercase letter, and a special character.">
+
+    <div class="requirements">
+      Password must be at least 12 characters long, contain at least:<br>
+      • 1 uppercase letter<br>
+      • 1 number<br>
+      • 1 special character
+    </div>
+
+    <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+
+    <button type="submit">Change Password</button>
+  </form>
+</section>
