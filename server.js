@@ -17,6 +17,8 @@ const utilities = require("./utilities/")
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const reviewRoute = require("./routes/reviewRoute");
+
 
 // Require sesion and access to database connections
 const session = require("express-session")
@@ -51,6 +53,7 @@ app.use(cookieParser())
 // Login Process activity
 app.use(utilities.checkJWTToken)
 
+
 // Make sessions available to all views
 app.use((req, res, next) => {
   res.locals.loggedin = req.session.loggedin
@@ -73,6 +76,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome)) /* {
 app.use("/account", accountRoute)
 // Inventory Route
 app.use("/inv", inventoryRoute)
+// Review Route
+app.use("/review", reviewRoute);
 
 /* ***********************
  * Routes

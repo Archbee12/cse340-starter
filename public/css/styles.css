@@ -467,6 +467,36 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* Review Star rating Styling */
+.rating-container {
+  margin: 1em 0;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.stars input[type="radio"] {
+  display: none;
+}
+
+.stars label {
+  font-size: 2em;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.stars input[type="radio"]:checked ~ label {
+  color: gold;
+}
+
+.stars label:hover,
+.stars label:hover ~ label {
+  color: gold;
+}
 
 @media (min-width: 840px) {
   body {

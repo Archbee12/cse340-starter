@@ -88,6 +88,53 @@ Util.buildVehicleDetail = async function(vehicle) {
   return detail
 }
 
+/* ****************************
+* Build the review section (reviews + form)
+* ************************** */
+Util.buildReviewSection = function (vehicle, reviews, accountData) {
+  let reviewHTML = `
+  <section class="reviews">
+    <h2>Customer Reviews</h2>
+  `
+
+  // 📝 Show reviews
+  if (reviews && reviews.length > 0) {
+    reviewHTML += `<ul class="review-list">`
+    reviews.forEach((review) => {
+      reviewHTML += `
+        <li>
+          <p>${review.review_text}</p>
+          <small>
+            By ${review.account_firstname} ${review.account_lastname}
+            on ${new Date(review.review_date).toLocaleDateString()}
+          </small>
+        </li>
+      `
+    })
+    reviewHTML += `</ul>`
+  } else {
+    reviewHTML += `<p>No reviews yet. Be the first to leave one!</p>`
+  }
+
+  // 🧑‍💻 If logged in, show form
+  if (accountData) {
+    reviewHTML += `
+      <form action="/review/add" method="POST" class="review-form">
+        <input type="hidden" name="inv_id" value="${vehicle.inv_id}">
+        <textarea name="review_text" placeholder="Write your review..." required></textarea>
+        
+        <button type="submit">Submit Review</button>
+      </form>
+    `
+  } else {
+    reviewHTML += `<p><a href="/account/login">Login</a> to leave a review.</p>`
+  }
+
+  reviewHTML += `</section>`
+  return reviewHTML
+}
+
+
 /* ************************************
 * Build the classification <select> element
 * ********************************** */

@@ -1,5 +1,5 @@
 CREATE TYPE public.account_type AS ENUM ('Client', 'Employee', 'Admin');
-ALTER TYPE public.account_type OWNER TO cse340database;
+ALTER TYPE public.account_type OWNER TO cse340_db;
 
 -- Table structure for table `classification`
 CREATE TABLE public.classification (
@@ -241,3 +241,25 @@ WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 UPDATE public.inventory
 SET	inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
 	inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+
+-- Creating Review Table
+CREATE TABLE review (
+  review_id SERIAL PRIMARY KEY,
+  inv_id INT REFERENCES inventory(inv_id) ON DELETE CASCADE,
+  account_id INT REFERENCES account(account_id) ON DELETE CASCADE,
+  review_text TEXT NOT NULL,
+  review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+); 
+
+-- Updating Client to Admin and Employee-- 
+UPDATE public.account
+SET account_type = 'Admin'
+WHERE LOWER(account_firstname) = 'manager';
+
+UPDATE public.account
+SET account_type = 'Employee'
+WHERE LOWER(account_firstname) = 'happy';
+
+-- Altering Table to add Star Rating
+ALTER TABLE review
+ADD COLUMN review_rating INT CHECK (review_rating BETWEEN 1 AND 5);
